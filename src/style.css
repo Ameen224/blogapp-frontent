@@ -1,4 +1,7 @@
 /* src/style.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
   margin: 0;
@@ -87,4 +90,101 @@ footer {
   margin-top: 128px;
   font-size: 14px;
   color: #aaa;
+}
+
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #90cdf4;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  color: #000;
+  position: relative;
+  text-align: center;
+}
+
+.modal-content h2 {
+  margin-bottom: 1rem;
+}
+
+.signup-btn {
+  background: #0f0f0f;
+  color: white;
+  padding: 10px 16px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 14px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+/* Add these new styles */
+.google-btn, .email-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-icon {
+  font-weight: bold;
+}
+
+.email-instruction {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.continue-btn {
+  margin-top: 16px !important;
+}
+
+.signin-link {
+  margin: 16px 0;
+  color: #333;
+}
+
+.signin-link a {
+  color: #3182ce;
+  text-decoration: underline;
+}
+
+.terms-text {
+  margin-top: 24px;
+  color: #4a5568;
+}
+
+.terms-text a {
+  color: #3182ce;
+  text-decoration: underline;
 }
