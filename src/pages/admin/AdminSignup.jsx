@@ -1,10 +1,10 @@
-// src/pages/AuthSuccess.jsx
+// src/pages/admin/AdminSignup.js
 
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate, useSearchParams } from "react-router-dom"
-import { setCredentials } from "../lib/authSlice"
-import { LoadingSpinner } from "../components/ui/loading-spinner"
+import { setCredentials } from "../../lib/authSlice"
+import { LoadingSpinner } from "../../components/ui/loading-spinner"
 
 export default function AuthSuccess() {
   const dispatch = useDispatch()

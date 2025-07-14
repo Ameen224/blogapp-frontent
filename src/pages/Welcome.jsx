@@ -1,89 +1,96 @@
-// src/pages/Welcome.jsx 
+// src/pages/user/Welcome.jsx 
 
-import React, { useState, useEffect } from 'react';
-import Navbar from "../components/Navbar";
-import { useSelector } from 'react-redux';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import SignupModal from '../components/SignupModal';
+import { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
+import { useNavigate, useSearchParams } from "react-router-dom"
+import { Navbar } from "../components/common/Navbar"
+import { Footer } from "../components/common/Footer"
+import { SignupModal } from "../components/modals/SignupModal"
+import { Button } from "../components/ui/button"
+import { Alert, AlertDescription } from "../components/ui/alert"
+import { X } from "lucide-react"
 
 export default function Welcome() {
-  const user = useSelector(state => state.auth.user);
-  const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
-  const [authError, setAuthError] = useState('');
-  const [searchParams] = useSearchParams();
+  const user = useSelector((state) => state.auth.user)
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const [showModal, setShowModal] = useState(false)
+  const [authError, setAuthError] = useState("")
 
   useEffect(() => {
-    // Check for auth errors in URL
-    const error = searchParams.get('error');
+    const error = searchParams.get("error")
     if (error) {
       switch (error) {
-        case 'auth_failed':
-          setAuthError('Authentication failed. Please try again.');
-          break;
-        case 'no_user':
-          setAuthError('No user information received. Please try again.');
-          break;
-        case 'server_error':
-          setAuthError('Server error occurred. Please try again later.');
-          break;
-        case 'processing_failed':
-          setAuthError('Failed to process authentication. Please try again.');
-          break;
+        case "auth_failed":
+          setAuthError("Authentication failed. Please try again.")
+          break
+        case "no_user":
+          setAuthError("No user information received. Please try again.")
+          break
+        case "server_error":
+          setAuthError("Server error occurred. Please try again later.")
+          break
+        case "processing_failed":
+          setAuthError("Failed to process authentication. Please try again.")
+          break
         default:
-          setAuthError('An error occurred during authentication.');
+          setAuthError("An error occurred during authentication.")
       }
-      
-      // Clear error from URL after showing it
-      const newUrl = window.location.pathname;
-      window.history.replaceState({}, document.title, newUrl);
+      // Clear the error from URL
+      navigate("/", { replace: true })
     }
-  }, [searchParams]);
+  }, [searchParams, navigate])
 
   useEffect(() => {
     if (user) {
       if (!user.name || !user.category) {
-        navigate("/profile-setup");
+        navigate("/profile-setup")
       } else {
-        navigate('/home');
+        navigate("/home")
       }
     }
-  }, [user, navigate]);
+  }, [user, navigate])
 
   return (
-    <div className="min-h-screen flex flex-col justify-between">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <Navbar />
-      
-      <main className="flex flex-col items-center text-center mt-32 px-8">
+      <main className="flex flex-col items-center justify-center min-h-[80vh] text-center px-8">
         {authError && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 max-w-md">
-            {authError}
-            <button
-              onClick={() => setAuthError('')}
-              className="ml-2 text-red-500 hover:text-red-700 font-bold"
-            >
-              ✕
-            </button>
-          </div>
+          <Alert className="mb-8 max-w-md bg-red-50 border-red-200">
+            <AlertDescription className="flex items-center justify-between">
+              <span className="text-red-700">{authError}</span>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setAuthError("")}
+                className="ml-4 text-red-500 hover:text-red-700 h-auto p-1"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </AlertDescription>
+          </Alert>
         )}
-        
-        <h1 className="text-5xl font-bold leading-tight mb-8">
-          Write with purpose & <br />
-          Read with curiosity.
-        </h1>
-        <button 
-          onClick={() => setShowModal(true)}
-          className="bg-[#90cdf4] text-black px-8 py-3 rounded-full font-semibold text-lg hover:bg-[#7cc0e8] transition"
-        >
-          Get Started
-        </button>
-      </main>
-      
-      <footer className="text-center mt-32 text-gray-500 text-sm py-4">
-        © 2023 Blogger's Haven.
-      </footer>
 
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-6xl font-bold leading-tight mb-8 text-gray-900">
+            Write with purpose & <br />
+            <span className="text-blue-600">Read with curiosity.</span>
+          </h1>
+          <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+            Join thousands of writers and readers in a community that celebrates knowledge, creativity, and meaningful
+            conversations.
+          </p>
+          <Button
+            onClick={() => setShowModal(true)}
+            size="lg"
+            className="px-12 py-4 text-lg font-semibold rounded-full shadow-lg hover:scale-105 transition-all duration-300"
+          >
+            Get Started
+          </Button>
+        </div>
+      </main>
+      <Footer />
       {showModal && <SignupModal onClose={() => setShowModal(false)} />}
     </div>
-  );
+  )
 }

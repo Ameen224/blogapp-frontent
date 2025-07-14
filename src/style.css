@@ -3,187 +3,61 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
 }
 
-body {
-  background-color: #0f0f0f;
-  color: white;
-  font-family: 'Helvetica Neue', sans-serif;
-}
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
 
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 32px;
-  border-bottom: 1px solid #444;
-}
-
-.navbar h1 {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.navbar .actions {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
-
-.navbar .actions span {
-  font-size: 16px;
-}
-
-.navbar button {
-  background-color: #90cdf4;
-  color: black;
-  padding: 8px 16px;
-  border-radius: 9999px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-}
-
-.welcome {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.welcome-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-top: 128px; 
-  padding: 0 32px;
-}
-
-.welcome-main h1 {
-  font-size: 40px;
-  font-weight: bold;
-  line-height: 1.3;
-  margin-bottom: 32px;
-}
-
-.welcome-main button {
-  background-color: #90cdf4;
-  color: black;
-  padding: 12px 32px;
-  border-radius: 9999px;
-  font-weight: 600;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  margin-top: 128px;
-  font-size: 14px;
-  color: #aaa;
-}
-
-.modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: #90cdf4;
-  padding: 2rem;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 400px;
-  color: #000;
-  position: relative;
-  text-align: center;
-}
-
-.modal-content h2 {
-  margin-bottom: 1rem;
-}
-
-.signup-btn {
-  background: #0f0f0f;
-  color: white;
-  padding: 10px 16px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 9999px;
-  cursor: pointer;
-  width: 100%;
-  font-size: 14px;
-}
-
-.close-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: transparent;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.modal-content input {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-/* Add these new styles */
-.google-btn, .email-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.btn-icon {
-  font-weight: bold;
-}
-
-.email-instruction {
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-.continue-btn {
-  margin-top: 16px !important;
-}
-
-.signin-link {
-  margin: 16px 0;
-  color: #333;
-}
-
-.signin-link a {
-  color: #3182ce;
-  text-decoration: underline;
-}
-
-.terms-text {
-  margin-top: 24px;
-  color: #4a5568;
-}
-
-.terms-text a {
-  color: #3182ce;
-  text-decoration: underline;
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
 }
